@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: main-svc-sync
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tectics1/gitops_msa_main.git
+    targetRevision: main  # 명시적으로 브랜치 지정하는 것이 좋음
+    path: .               # 매니페스트 위치 경로를 지정
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
